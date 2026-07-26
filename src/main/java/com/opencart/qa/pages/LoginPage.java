@@ -21,7 +21,7 @@ public class LoginPage {
 		eleUtil = new ElementUtil(driver);
 	}
 	
-	//3. Private By locators: Page Object
+	//3. Private By locators: Page Object - Object Repo
 	private final By emailId = By.id("input-email");
 	private final By password = By.id("input-password");
 	private final By loginBtn = By.cssSelector("input[type='submit']");
@@ -29,7 +29,7 @@ public class LoginPage {
 	private final By registerLink = By.linkText("Register");
 	
 	//4.Public page actions/methods:
-	@Step("Getting login page title....")
+	@Step("Getting login page title value......")
 	public String getLoginPageTitle() {
 		String actTitle = eleUtil.waitForTitleIs(AppConstants.LOGIN_PAGE_TITLE, AppConstants.SHORT_TIME_OUT);
 		System.out.println("Login Page Title : "+actTitle);
