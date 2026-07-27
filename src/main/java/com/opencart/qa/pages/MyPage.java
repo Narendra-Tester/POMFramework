@@ -19,7 +19,10 @@ public class MyPage {
 		System.out.println("Hello login");
 
 	}
-	
+		public void logout() {
+
+		System.out.println("Hello logout");
+	}
 	
 	
 }
