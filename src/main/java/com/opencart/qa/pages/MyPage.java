@@ -10,7 +10,13 @@ public class MyPage {
 	public void syso() {
 		System.out.println("hello page");
 	}
-
+	public void login() {
+		System.out.println("Hello login");
+		System.out.println("Hello login");
+		System.out.println("Hello login");
+		System.out.println("Hello login");
+	}
+	
 	
 	
 	
