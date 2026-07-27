@@ -11,10 +11,10 @@ public class MyPage {
 		System.out.println("hello page");
 	}
 	public void login() {
-		System.out.println("Hello app");
-		System.out.println("Hello app");
-		System.out.println("Hello app");
-		System.out.println("Hello app");
+		System.out.println("Hello Prakash");
+		System.out.println("Hello Prakash");
+		System.out.println("Hello Prakash");
+		System.out.println("Hello Prakash");
 	}
 	
 	
