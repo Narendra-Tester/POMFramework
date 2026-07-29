@@ -11,7 +11,7 @@
      </listeners>
      
      
-     <!-- test block 1
+     <!--test block 1-->
      <test name="Login Page Test">  
          <parameter name="browser" value="chrome"/> 
          <classes>
@@ -19,7 +19,7 @@
          </classes>
     </test>  
     
-    test block 2
+    <!--test block 2-->
     <test name="Home Page Test">  
          <parameter name="browser" value="chrome"/>
          <classes>
@@ -27,13 +27,13 @@
          </classes>
     </test>
     
-     test block 3
+     <!--test block 3-->
     <test name="Product Info Page Test">  
          <parameter name="browser" value="chrome"/>
          <classes>
              <class name="com.opencart.qa.tests.ProductInfoPageTest" />
          </classes>
-    </test>-->
+    </test>
     
     <!-- test block 4-->
     <test name="Register Page Test">  
