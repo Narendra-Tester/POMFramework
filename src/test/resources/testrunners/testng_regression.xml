@@ -19,30 +19,30 @@
          </classes>
     </test>  
     
-    <!--test block 2-->
+    <!--test block 2
     <test name="Home Page Test">  
          <parameter name="browser" value="chrome"/>
          <classes>
              <class name="com.opencart.qa.tests.HomePageTest" />
          </classes>
     </test>
-    
-     <!--test block 3-->
+    -->
+     <!--test block 3
     <test name="Product Info Page Test">  
          <parameter name="browser" value="chrome"/>
          <classes>
              <class name="com.opencart.qa.tests.ProductInfoPageTest" />
          </classes>
     </test>
-    
-    <!-- test block 4-->
+    -->
+    <!-- test block 4
     <test name="Register Page Test">  
          <parameter name="browser" value="chrome"/>
          <classes>
              <class name="com.opencart.qa.tests.RegisterPageTest" />
          </classes>
     </test>
-    
+    -->
     
    
 </suite>
