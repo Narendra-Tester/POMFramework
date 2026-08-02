@@ -1,60 +1,129 @@
-pipeline{
-    agent any 
-    stages {
-        stage("build"){
-            steps(){
-                echo("build the project")
+pipeline 
+{
+    agent any
+    
+    tools{
+        maven 'maven'
+        }
+
+    stages 
+    {
+        stage('Build') 
+        {
+            steps
+            {
+                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+            post 
+            {
+                success
+                {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
             }
         }
-        stage("run unit test"){
-            steps(){
-                echo("run UTs")
-            }
-        }         
-        stage("run integration test"){
-            steps(){
-               echo("run ITs") 
+        
+        
+        
+        stage("Deploy to QA"){
+            steps{
+                echo("deploy to qa done")
             }
         }
-        stage("deploy to dev"){
-            steps(){
-               echo("deploy to dev") 
+        
+        
+        
+                
+        stage('Regression Automation Tests') {
+    steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+            cleanWs()
+            git branch: 'master', url: 'https://github.com/Narendra-Tester/POMFramework.git'            
+            sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_regression.xml -Denv=qa"
+        }
+    }
+}
+            
+
+                
+     
+        stage('Publish Allure Reports') {
+           steps {
+                script {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: '/allure-results']]
+                    ])
+                }
             }
         }
-        stage("deploy to qa"){
-            steps(){
-               echo("deploy to qa") 
+        
+        
+        stage('Publish ChainTest HTML Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false, 
+                                  keepAll: true, 
+                                  reportDir: 'target/chaintest', 
+                                  reportFiles: 'Index.html', 
+                                  reportName: 'HTML Regression ChainTest Report', 
+                                  reportTitles: ''])
             }
         }
-        stage("run regression test cases on qa"){
-            steps(){
-               echo("run test cases on qa") 
+        
+        stage("Deploy to Stage"){
+            steps{
+                echo("deploy to Stage")
             }
         }
-        stage("deploy to stage"){
-            steps(){
-               echo("deploy to stage") 
+        
+        stage('Sanity Automation Test on Stage') {
+    steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+            cleanWs()
+            git branch: 'master', url: 'https://github.com/Narendra-Tester/POMFramework.git'
+            sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml -Denv=stage"
+        }
+    }
+}
+        
+        
+        
+        stage('Publish sanity ChainTest Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false, 
+                                  keepAll: true, 
+                                  reportDir: 'target/chaintest', 
+                                  reportFiles: 'Index.html', 
+                                  reportName: 'HTML Sanity ChainTest Report', 
+                                  reportTitles: ''])
             }
         }
-        stage("run sanity test cases on stage"){
-            steps(){
-               echo("run sanity test cases on stage") 
+        
+        
+        stage("Deploy to PROD"){
+            steps{
+                echo("deploy to PROD")
             }
         }
-        stage("deploy to uat"){
-            steps(){
-               echo("deploy to uat") 
-            }
+
+
+        stage('Sanity Automation Test on PROD') {
+    	steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+            cleanWs()
+            git branch: 'master', url: 'https://github.com/Narendra-Tester/POMFramework.git'
+            sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml -Denv=prod"
         }
-        stage("deploy to prod"){
-            steps(){
-               echo("deploy to prod") 
-            }
-        }
-        stage("run smoke test cases on prod"){
-            steps(){
-               echo("run smoke test cases on prod") 
-            }
-        }
+    }
+}
+        
+        
     }
 }

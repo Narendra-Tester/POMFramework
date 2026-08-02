@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Open Cart Test Sanity Suite" verbose="3" parallel="tests" thread-count="3">
+<!-- verbose values are between 1 to 10 and it is effect on report genaration 3 is commenly used verbose value -->
+     
+     <listeners>
+         <listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
+         <listener class-name="com.opencart.qa.listeners.TestAllureListener"/>
+         <listener class-name="com.opencart.qa.listeners.AnnotationTransformer"/>
+     </listeners>
+     
+     
+     <!--test block 1-->
+     <test name="Login Page Test">  
+         <parameter name="browser" value="chrome"/> 
+         <classes>
+             <class name="com.opencart.qa.tests.LoginPageTest" />
+         </classes>
+    </test>  
+    
+    
+    
+   
+</suite>

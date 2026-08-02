@@ -1,0 +1,65 @@
+pipeline{
+    agent any 
+    stages {
+        stage("build"){
+            steps(){
+                echo("build the project")// dev git repo url
+            }
+        }
+        stage("run unit test"){
+            steps(){
+                echo("run UTs")//dev
+            }
+        }         
+        stage("run integration test"){
+            steps(){
+               echo("run ITs") //dev
+            }
+        }
+        stage("deploy to dev"){
+            steps(){
+               echo("deploy to dev") //dev
+            }
+        }
+        stage("deploy to qa"){
+            steps(){
+               echo("deploy to qa") //dev
+            }
+        }
+        stage("run regression test cases on qa"){
+            steps(){
+               echo("run test cases on qa") //QA automation team: automation git repo : TCs
+            }
+        }
+        stage("deploy to stage"){
+            steps(){
+               echo("deploy to stage") //dev
+            }
+        }
+        stage("run sanity test cases on stage"){
+            steps(){
+               echo("run sanity test cases on stage") //QA automation team: automation git repo : TCs
+            }
+        }
+        stage("deploy to uat"){
+            steps(){
+               echo("deploy to uat") //dev
+            }
+        }
+        stage("run sanity test cases on uat"){
+            steps(){
+               echo("run sanity test cases on stage") //QA automation team: automation git repo : TCs
+            }
+        }
+        stage("deploy to prod"){
+            steps(){
+               echo("deploy to prod") //dev 
+            }
+        }
+        stage("run smoke test cases on prod"){
+            steps(){
+               echo("run smoke test cases on prod") //QA automation team: automation git repo : TCs
+            }
+        }
+    }
+}
