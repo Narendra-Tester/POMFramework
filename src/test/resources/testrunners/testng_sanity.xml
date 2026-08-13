@@ -12,6 +12,7 @@
      
      
      <!--test block 1-->
+     <!-- Sanity -->
      <test name="Login Page Test">  
          <parameter name="browser" value="chrome"/> 
          <classes>
